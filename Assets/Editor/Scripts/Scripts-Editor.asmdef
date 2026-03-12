@@ -2,7 +2,8 @@
     "name": "Scripts-Editor",
     "rootNamespace": "",
     "references": [
-        "GUID:aba0d71f30812e54ba0c02407b0d48ed"
+        "GUID:aba0d71f30812e54ba0c02407b0d48ed",
+        "GUID:343deaaf83e0cee4ca978e7df0b80d21"
     ],
     "includePlatforms": [
         "Editor"
