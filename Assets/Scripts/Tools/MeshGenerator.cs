@@ -11,7 +11,7 @@ public class MeshGenerator
 
         int v = 0;
         System.Random rand = seed != 0 ? new Random(seed) : new Random();
-        float noiseRandCoef = rand.Next(1, 100) / 100.0f;
+        float noiseRandCoef = rand.Next(10, 50) / 100.0f;
 
         for (int x = 0; x < sizeX; x++)
         {
@@ -64,7 +64,7 @@ public class MeshGenerator
 
     static void AddQuad(List<int> tris,int a,int b,int c,int d)
     {
-        tris.Add(a); tris.Add(b); tris.Add(c);
-        tris.Add(a); tris.Add(c); tris.Add(d);
+        tris.Add(a); tris.Add(c); tris.Add(b);
+        tris.Add(a); tris.Add(d); tris.Add(c);
     }
 }
