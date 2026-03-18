@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace GameEditor.Scripts
+namespace EditorScripts
 {
     [CustomEditor(typeof(Level))]
     public class LevelEditor : UnityEditor.Editor
@@ -11,15 +11,8 @@ namespace GameEditor.Scripts
         {
             base.OnInspectorGUI();
             
-            if (GUILayout.Button("Generate path"))
-            {
-                (target as Level)?.GeneratePath();
-            }
-            
-            if (GUILayout.Button("Generate buildings"))
-            {
-                (target as Level)?.GenerateBuildings();
-            }
+            if (GUILayout.Button("Generate"))
+                (target as Level)?.Generate();
         }
     }
 }
