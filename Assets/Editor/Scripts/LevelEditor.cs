@@ -11,9 +11,14 @@ namespace GameEditor.Scripts
         {
             base.OnInspectorGUI();
             
-            if (GUILayout.Button("Generate"))
+            if (GUILayout.Button("Generate path"))
             {
-                (target as Level)?.GenerateLevel();
+                (target as Level)?.GeneratePath();
+            }
+            
+            if (GUILayout.Button("Generate buildings"))
+            {
+                (target as Level)?.GenerateBuildings();
             }
         }
     }
