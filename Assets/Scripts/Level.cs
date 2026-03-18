@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using UnityEngine.Splines;
 
 namespace DefaultNamespace
@@ -9,14 +10,14 @@ namespace DefaultNamespace
         [SerializeField] private int _pointRadius;
         [SerializeField] private int _pathLength;
         [SerializeField] private int _pathSeed;
+
         [Header("Buildings")]
-        [SerializeField] private int _sizeX;
-        [SerializeField] private int _sizeY;
         [SerializeField] private float _cellSize;
+        [SerializeField] private float _cityWidth;
+        [SerializeField] private float _streetWidth;
         [SerializeField] private float _maxHeight;
         [SerializeField] private int _seed = 0;
-
-        private Spline _path;
+        [SerializeField] [HideInInspector] private Spline _path;
         
         public void GeneratePath()
         {
@@ -26,7 +27,7 @@ namespace DefaultNamespace
         
         public void GenerateBuildings()
         {
-            var mesh = MeshGenerator.Generate(_sizeX, _sizeY, _cellSize, _maxHeight, _seed);
+            var mesh = MeshGenerator.Generate(_path, _cityWidth, _streetWidth, _cellSize, _maxHeight, _seed);
             GetComponent<MeshFilter>().mesh = mesh;
         }
     }

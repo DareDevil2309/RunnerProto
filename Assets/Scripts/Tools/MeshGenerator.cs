@@ -1,44 +1,44 @@
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Splines;
 using Random = System.Random;
 
 public class MeshGenerator
 {
-    public static Mesh Generate(int sizeX, int sizeZ, float cellSize, float maxHeight, int seed = 0)
+    public static Mesh Generate(Spline path, float width, float streetWidth, float cellSize, float maxHeight, int seed = 0)
     {
         List<Vector3> vertices = new();
         List<int> triangles = new();
 
-        int v = 0;
-        System.Random rand = seed != 0 ? new Random(seed) : new Random();
-        float noiseRandCoef = rand.Next(10, 50) / 100.0f;
-
-        for (int x = 0; x < sizeX; x++)
+        var v = 0;
+        var rand = seed != 0 ? new Random(seed) : new Random();
+        var p = new Vector3[8];
+        
+        for (float d = 0; d < path.GetLength(); d += cellSize)
         {
-            for (int z = 0; z < sizeZ; z++)
+            for (float w = -width; w < width; w += cellSize)
             {
-                float height = Mathf.PerlinNoise(x * noiseRandCoef, z * noiseRandCoef) * maxHeight;
-                if (x % 5 == 0 || z % 5 == 0)
-                    height = 0.01f;
+                var noiseRandCoef = rand.Next(10, 50) / 100.0f;
+                var t = SplineUtility.GetNormalizedInterpolation(path, d, PathIndexUnit.Distance);
+                var pos = path.EvaluatePosition(t);
+                var height = Mathf.PerlinNoise(pos.x * noiseRandCoef, pos.z * noiseRandCoef) * maxHeight;
 
-                Vector3 basePos = new Vector3(x * cellSize, 0, z * cellSize);
+                if (Mathf.Abs(w) < streetWidth)
+                    height = 0;
+                
+                var basePos = new Vector3(pos.x, 0, pos.z + w);
 
-                Vector3 p0 = basePos;
-                Vector3 p1 = basePos + new Vector3(cellSize, 0, 0);
-                Vector3 p2 = basePos + new Vector3(cellSize, 0, cellSize);
-                Vector3 p3 = basePos + new Vector3(0, 0, cellSize);
+                p[0] = basePos;
+                p[1] = basePos + new Vector3(cellSize, 0, 0);
+                p[2] = basePos + new Vector3(cellSize, 0, cellSize);
+                p[3] = basePos + new Vector3(0, 0, cellSize);
+                p[4] = p[0] + Vector3.up * height;
+                p[5] = p[1] + Vector3.up * height;
+                p[6] = p[2] + Vector3.up * height;
+                p[7] = p[3] + Vector3.up * height;
 
-                Vector3 p4 = p0 + Vector3.up * height;
-                Vector3 p5 = p1 + Vector3.up * height;
-                Vector3 p6 = p2 + Vector3.up * height;
-                Vector3 p7 = p3 + Vector3.up * height;
-
-                vertices.AddRange(new[]
-                {
-                    p0,p1,p2,p3, // bottom
-                    p4,p5,p6,p7  // top
-                });
-
+                vertices.AddRange(p);
                 // стены
                 AddQuad(triangles, v+0,v+1,v+5,v+4);
                 AddQuad(triangles, v+1,v+2,v+6,v+5);
@@ -52,7 +52,7 @@ public class MeshGenerator
             }
         }
 
-        Mesh mesh = new Mesh();
+        var mesh = new Mesh();
         mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
 
         mesh.SetVertices(vertices);
