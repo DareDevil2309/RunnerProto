@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b7eec955971424b9e26a8aae3875e10, type: 3}
+  m_Name: ChunksPool
+  m_EditorClassIdentifier: 
+  _chunkPrefabs:
+  - {fileID: 1563263475010260671, guid: b20c83658e81e1b459f7875ff9308973, type: 3}
+  - {fileID: 1563263475010260671, guid: b20c83658e81e1b459f7875ff9308973, type: 3}
+  - {fileID: 1563263475010260671, guid: b20c83658e81e1b459f7875ff9308973, type: 3}
+  - {fileID: 1563263475010260671, guid: b20c83658e81e1b459f7875ff9308973, type: 3}

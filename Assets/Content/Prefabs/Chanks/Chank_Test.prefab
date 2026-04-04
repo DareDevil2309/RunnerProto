@@ -657,6 +657,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5531103116369025115}
+  - component: {fileID: 1563263475010260671}
   m_Layer: 0
   m_Name: Chank_Test
   m_TagString: Untagged
@@ -685,6 +686,33 @@ Transform:
   - {fileID: 911844480366811282}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1563263475010260671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403925580180258188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75edbf186f2742f4af57db173453969c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hex:
+    Radius: 30
+  _bindPoints:
+  - {fileID: 3809012602664102730}
+  - {fileID: 4517304216183986108}
+  - {fileID: 3631079430158236597}
+  - {fileID: 940331281499916925}
+  - {fileID: 7612494455213746653}
+  - {fileID: 6349092390085160692}
+  - {fileID: 6003030132501776963}
+  - {fileID: 5500010607392070543}
+  - {fileID: 8232308052092793466}
+  - {fileID: 9141370420911611272}
+  - {fileID: 5704795590940705994}
+  - {fileID: 2182444738337212305}
 --- !u!1 &1679330539451612970
 GameObject:
   m_ObjectHideFlags: 0
